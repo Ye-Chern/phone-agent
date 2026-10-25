@@ -1,0 +1,50 @@
+__pycache__/
+*.pyc
+*.db
+*.sqlite
+*.sqlite-*
+*.log
+*.log.*
+secrets.json
+gemini.key
+chatgpt_accounts.json
+chatgpt_hostid
+.phoneagent_auth/
+.env
+*.pem
+*.key
+debug.keystore
+work/
+node_modules/
+app/out/
+
+# 本地备份与历史文件（含旧密钥副本，勿发布）
+*.bak
+*.bak-*
+
+# 二进制构建产物（APK 随 Release 发布；backend.zip 由 scripts/build_backend_asset.py 重新生成）
+*.apk
+app/assets/backend.zip
+
+# 第三方精简构建依赖（体积大且非本项目版权，构建时自行准备，见 app/build.sh）
+app/android-30.jar
+app/core-lambda-stubs.jar
+
+# 本地一次性诊断/旧部署脚本
+diag*.py
+deploy_cc.sh
+pa_deploy_v2.sh
+
+# 本地开发历史文档与一次性验收/运维脚本（不随仓库发布）
+HANDOFF.md
+REFACTOR.md
+run_apk_build.sh
+scripts/device_*
+scripts/*_acceptance.py
+scripts/*_smoke.py
+scripts/bootstrap_google.py
+scripts/siliconflow_probe.py
+scripts/research_sources.py
+scripts/render_fixture.py
+scripts/package_release.py
+scripts/audit_delivery.py
