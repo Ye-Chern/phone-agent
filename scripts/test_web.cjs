@@ -2,7 +2,7 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const {JSDOM,requestInterceptor,VirtualConsole} = require('../work/upgrade-20261011/tooling/node_modules/jsdom');
+const {JSDOM,requestInterceptor,VirtualConsole} = require('jsdom');
 const root=path.resolve(__dirname,'..','web'), errors=[];
 let autoApproveWork=false;
 let allowOutsideWorkspace=false;

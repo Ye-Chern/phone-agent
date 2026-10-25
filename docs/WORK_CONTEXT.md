@@ -24,5 +24,5 @@
 
 当前行为测试覆盖：正常前缀压缩、tool 组完整性、10+个同一 user turn 工具子组压缩并保留 pinned 原文、schema overhead 计入触发与返回估算、新 pinned 不使旧前缀失效、source_user 修订及源漂移/分支不复用、跨 user turn 无摘要 callback 重用旧 checkpoint、重启后 checkpoint 复用、增量扩展、摘要回调失败且不落 checkpoint、关闭开关、预算上下界，以及系统/current/pinned 超预算报错。
 
-2026-10-12真机验收：GPT-6-Luna处理40条合成历史，首轮实际生成摘要checkpoint，估算输入15961→7587；下一条user请求复用相同checkpoint，估算7651，只有正常推理请求、没有重复摘要请求。原始消息未删除，两轮回复PIPELINE_OK。证据见 `work/upgrade-20261012/work-compaction-acceptance.json`。更大旧历史超过有界摘要输入时会退回近期完整原文，需分阶段整理；该退路不会伪造checkpoint。尚需真实 Work 路径验收线程重启、模型切换、实际模型配额失败、图片 token 估算和用户可见错误提示。摘要质量并不由这些连通性及离线测试证明。
+更大旧历史超过有界摘要输入时会退回近期完整原文，需分阶段整理；该退路不会伪造checkpoint。真实 Work 路径下的线程重启、模型切换、配额失败、图片 token 估算和用户可见错误提示仍需更多验证；摘要质量不由连通性及离线测试证明。
 

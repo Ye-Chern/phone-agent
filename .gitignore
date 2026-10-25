@@ -38,6 +38,7 @@ pa_deploy_v2.sh
 # 本地开发历史文档与一次性验收/运维脚本（不随仓库发布）
 HANDOFF.md
 REFACTOR.md
+docs/UPGRADE.md
 run_apk_build.sh
 scripts/device_*
 scripts/*_acceptance.py

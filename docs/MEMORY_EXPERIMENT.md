@@ -17,7 +17,7 @@ python scripts/evaluate_memory.py
 python -m unittest discover -s tests -p test_memory_experiment.py
 ```
 
-默认随机种子为 `20261011`，固定数据规模为 100 轮和 200 轮。命令会在 `work/upgrade-20261011/` 写入 `memory-experiment.json`、`blind-eval.jsonl` 和 `synthetic-dialogue.jsonl`。其中 `memory-experiment-revised-before-summary.json` 保存本次改进 B 前、使用相同自然问题和实体过滤的结果；`memory-experiment-initial.json` 另存更早的查询和过滤基线。结果 JSON 记录种子、预算、方法注记、各规模各方法逐题数据、盲评臂映射和抽取探针。SQLite 临时数据库会使用 `sqlite3.Row`，先创建宿主程序要求的 `conversations` / `messages` 基表，再调用 `storage.migrate()`；实验结束删除数据库。
+默认随机种子为 `20261011`，固定数据规模为 100 轮和 200 轮。命令会在 `work/upgrade-20261011/` 写入 `memory-experiment.json`、`blind-eval.jsonl` 和 `synthetic-dialogue.jsonl`。结果 JSON 记录种子、预算、方法注记、各规模各方法逐题数据、盲评臂映射和抽取探针。SQLite 临时数据库会使用 `sqlite3.Row`，先创建宿主程序要求的 `conversations` / `messages` 基表，再调用 `storage.migrate()`；实验结束删除数据库。
 
 各指标含义：
 

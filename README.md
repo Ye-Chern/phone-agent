@@ -1,6 +1,6 @@
 # PhoneAgent 2.2
 
-2.2.0 提供可分享的APK、自带运行包、Termux首次设置引导和“API与连接”配置页；他人填写自己的API或登录自己的ChatGPT。见[首次安装与分享说明](docs/SHARING.md)。本版修复了图片上下文误估，以及允许外部访问时未选目录仍挡工具的问题。
+2.2.0 提供可分享的APK、自带运行包、Termux首次设置引导和“API与连接”配置页；他人填写自己的API或登录自己的ChatGPT。见[首次安装与分享说明](docs/SHARING.md)。
 
 Termux 上的 Python 标准库服务，供原生 Android 应用和网页版共用。Work 用项目目录和工具完成任务；Chat 用 Gemma 与本地记忆继续对话。原有 DeepSeek、图片、搜索、工具时间线、中断和重试协议保留。
 
@@ -19,7 +19,7 @@ Termux 上的 Python 标准库服务，供原生 Android 应用和网页版共�
 
 现有 `~/.phoneagent/secrets.json` 中的 DeepSeek / Exa 设置继续有效。Google 密钥独立保存在 Termux 私有目录 `~/.phoneagent/gemini.key`（文件权限 600），不要放到 Download、源码或导出数据中。
 
-Google 注册表包含 `gemma-4-26b-a4b-it`、`gemma-4-31b-it`、`gemini-3.5-flash-lite`、`gemini-3.8-flash`，检索向量模型为 `gemini-embedding-2`。2026-10-11 已在连接手机上核对实际模型目录并用合成素材调用；见 [升级与验收报告](docs/UPGRADE.md)。
+Google 注册表包含 `gemma-4-26b-a4b-it`、`gemma-4-31b-it`、`gemini-3.5-flash-lite`、`gemini-3.8-flash`，检索向量模型为 `gemini-embedding-2`。
 
 环境变量支持 `PHONEAGENT_CONFIG_DIR`、`PHONEAGENT_GEMINI_KEY_FILE` 或 `PHONEAGENT_GEMINI_KEY`；DeepSeek 仍支持 `PHONEAGENT_DEEPSEEK_KEY`、`PHONEAGENT_MODEL`、`PHONEAGENT_MAX_TOKENS`、`PHONEAGENT_REASONING_EFFORT`。不要把真实值写进命令历史。Windows 的默认数据目录与 Termux 分开；PC 无网络时可以离线测试、管理本地会话。
 
@@ -47,20 +47,20 @@ Google 注册表包含 `gemma-4-26b-a4b-it`、`gemma-4-31b-it`、`gemini-3.5-fla
 
 ## 更新、回退和验证
 
-2.1.2 按ChatGPT账户模型目录的 `input_modalities` 开放图片输入，GPT-6-Luna可在Chat和Work用输入框旁的🖼按钮添加图片。真实识图由用户自行试用，本补丁未发送图片推理验收请求。
+2.1.2 按ChatGPT账户模型目录的 `input_modalities` 开放图片输入，GPT-6-Luna可在Chat和Work用输入框旁的🖼按钮添加图片。
 
 2.1 的 ChatGPT 套餐授权、Work自动压缩、思考强度、顶部折叠和显示限速见 [CHATGPT_PLAN.md](docs/CHATGPT_PLAN.md)。授权依赖在Windows执行 `python -m pip install -r requirements-phoneagent-auth.txt`；Termux优先 `pkg install python-cryptography`，再安装PyJWT。依赖缺失会禁用授权入口并明确提示，原DeepSeek/Google功能仍可使用。Work压缩预算默认12000个估算输入tokens，可设2048–64000；它不需要Embedding。顶部模型的思考选择按实际支持档位保存到当前会话。
 
 USB 更新包必须包含 `agent.py`、`phoneagent_core/`、`web/`（含 vendor）、`start.sh`、`watchdog.sh`、`deploy_update.sh` 和可选 `examples/`。复制到手机 Download 下独立目录，在 Termux 执行其中的 `deploy_update.sh`。运行中任务会阻止更新；私有备份包含代码、配置及 SQLite 一致性快照。源码校验后重启，并检查版本。
 
-原生 APK 用 `app/build.sh` 在现有 Termux 构建目录编译，保留原签名，电脑用 `adb install -r` 更新。回退时恢复备份代码及旧 APK，保留当前数据库；不要用旧数据库覆盖新产生的消息。完整操作与限制见 [UPGRADE.md](docs/UPGRADE.md)。
+原生 APK 用 `app/build.sh` 在现有 Termux 构建目录编译，保留原签名，电脑用 `adb install -r` 更新。回退时恢复备份代码及旧 APK，保留当前数据库；不要用旧数据库覆盖新产生的消息。
 
 ```powershell
 python -m unittest discover -s tests -v
 python scripts/evaluate_memory.py
 ```
 
-离线测试不调用云端。Web DOM 验收需要 Node 和测试用 jsdom：`npm install --prefix work/upgrade-20261011/tooling jsdom@30.1.2`，再执行 `node scripts/test_web.cjs`。运行时网页依赖已本地打包，无需 npm/CDN。
+离线测试不调用云端。Web DOM 检查需要 Node 和测试用 jsdom：在仓库根目录 `npm install jsdom@30` 后执行 `node scripts/test_web.cjs`。运行时网页依赖已本地打包，无需 npm/CDN。
 
 100/200 轮实验、失败样例和人工盲评协议见 [MEMORY_EXPERIMENT.md](docs/MEMORY_EXPERIMENT.md)。它主要测检索与上下文，不能当作文学质量结论。
 
